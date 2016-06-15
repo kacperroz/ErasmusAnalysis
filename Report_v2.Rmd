@@ -1,0 +1,123 @@
+---
+title: "Analysis of Spanish Erasmus students"
+author: "Nico Dehnert, Kacper Rozenbaum"
+date: "15 June 2016"
+runtime: shiny
+output: html_document
+---
+
+```
+#stuff to load
+
+install.packages("plyr")
+install.packages("RCurl")
+install.packages("GISTools")
+install.packages("maps")
+install.packages("mapdata")
+install.packages("maptools")
+install.packages("mapdata")
+install.packages("mapplots")
+install.packages("scales")
+install.packages("mapproj")
+
+library(plyr)
+library(RCurl)
+library(GISTools)
+library(maps)
+library(mapdata)
+library(maptools)
+library(mapdata)
+library(mapplots)
+library(scales)
+library(mapproj)
+
+
+ProjectData <- read.csv("Erasmus.csv", header = TRUE)
+
+student_age <- ProjectData$AGE
+
+cities <- ProjectData$City
+
+mean(student_age, na.rm = TRUE)
+
+AgeNormDistribution <- dnorm(student_age)
+
+city_count <- count(cities)
+
+city_count_sorted <- city_count[order(city_count[["freq"]], decreasing = TRUE),]
+
+top5cities <- head(city_count_sorted)
+
+```
+
+Basic statistics of age of Erasmus students: 
+
+
+```
+
+age_summary <- summary(student_age)
+print(age_summary)
+
+```
+
+
+Histogram of age of Erasmus students:
+```
+
+age_hist <- hist(student_age, xlab = "Age of students", main = "Histogram of students' age", ylab = "Number of students", xlim = c(18,30), freq = 1, breaks = 49)
+
+print(age_hist)
+
+```
+
+Basic statistics of years of higher education of Erasmus students:
+```
+eduYears_summary <- summary(ProjectData$Years_Higher_Education)
+print(eduYears_summary)
+```
+
+Histogram of years of higher education
+
+
+```
+hist(ProjectData$Years_Higher_Education, xlab = "Years of higher education", main = "Histogram of years of higher education", ylab = "Number of students", xlim = c(0,10), freq = 1, breaks = 20, col = "lightblue")
+```
+
+Top 5 universities sending students to Erasmus exchange
+```
+
+barplot(top5cities$freq, main = "Top 5 universities", xlab = "University", ylab = "Students" , names.arg = top5cities$x, col = "darkblue", cex.names = 0.4)
+
+```
+
+TOp 6  universities by number of Erasmus students - visualization:
+```
+add.alpha(brewer.pal(5,'Reds'),0.5)
+
+
+myColours = c(1, "steelblue", "#FFBB00", rgb(0.4, 0.2, 0.3))
+> myColoursAlpha <- add.alpha(myColours, alpha=0.4)
+
+map("worldHires","Spain", xlim=c(-10,5),ylim=c(35,45), col="gray90", fill=TRUE)
+
+
+
+
+add.pie(z=c(1), x=-3.45, y=40.25, radius=1.5, labels = "Madrid1 (4480)", border = NULL, edges = 200, clockwise = TRUE, col = "#A50F1580")
+
+add.pie(z=c(1), x=2.1, y=41.21, radius=1.7, labels = "Barcelona (4255)", border = NULL, edges = 200, clockwise = TRUE, col = "#A50F1580")
+
+add.pie(z=c(1), x=-3.35, y=37.1, radius=0.5, labels = "Granada (1934)", border = NULL, edges = 200, clockwise = TRUE, col = "#A50F1580")
+
+add.pie(z=c(1), x=-2.56, y=43.16, radius=0.27, labels = "Bilbao (1493)", border = NULL, edges = 200, clockwise = TRUE, col = "#A50F1580")
+
+add.pie(z=c(1), x=-3.45, y=40.25, radius=0.24, labels = "Madrid2 (1445)", border = NULL, edges = 200, clockwise = TRUE, col = "#A50F1580")
+
+add.pie(z=c(1), x=-4.23, y=36.43, radius=0.03, labels = "Malaga (1036)", border = NULL, edges = 200, clockwise = TRUE, col = "#A50F1580")
+
+```
+
+
+
+
+
