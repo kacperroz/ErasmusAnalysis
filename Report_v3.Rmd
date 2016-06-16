@@ -6,9 +6,9 @@ runtime: shiny
 output: html_document
 ---
 
-```
-```{r echo=FALSE, eval=TRUE, tidy=TRUE}
+```{r echo=FALSE, eval=TRUE, tidy=TRUE, message=FALSE}
 #stuff to load
+
 if (0){
   install.packages("plyr")
   install.packages("RCurl")
@@ -21,6 +21,7 @@ if (0){
   install.packages("scales")
   install.packages("mapproj")
 }
+
 
 library(plyr)
 library(RCurl)
@@ -63,7 +64,7 @@ print(age_summary)
 Histogram of age of Erasmus students:
 ```{r echo=FALSE, eval=TRUE, tidy=TRUE}
 
-age_hist <- hist(student_age, xlab = "Age of students", main = "Histogram of students' age", ylab = "Number of students", xlim = c(18,30), freq = 1, breaks = 49)
+hist(student_age, xlab = "Age of students", main = "Histogram of students' age", ylab = "Number of students", xlim = c(18,30), freq = 1, breaks = 49)
 ```
 
 Basic statistics of years of higher education of Erasmus students:
