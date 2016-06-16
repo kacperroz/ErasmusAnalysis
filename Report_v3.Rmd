@@ -1,5 +1,5 @@
 ---
-title: "Analysis of Spanish Erasmus students"
+title: "Analysis of Spanish outgoing Erasmus students"
 author: "Nico Dehnert, Kacper Rozenbaum"
 date: "15 June 2016"
 runtime: shiny
@@ -64,8 +64,10 @@ print(age_summary)
 Histogram of age of Erasmus students:
 ```{r echo=FALSE, eval=TRUE, tidy=TRUE}
 
-hist(student_age, xlab = "Age of students", main = "Histogram of students' age", ylab = "Number of students", xlim = c(18,30), freq = 1, breaks = 49)
+hist(student_age, xlab = "Age of students", main = "Histogram of students' age", ylab = "Number of students", xlim = c(18,30), freq = 1, breaks = 49, col = "lightblue")
 ```
+Oldest Erasmus student is 67 years old!
+
 
 Basic statistics of years of higher education of Erasmus students:
 ```{r echo=FALSE, eval=TRUE, tidy=TRUE}
@@ -82,9 +84,9 @@ hist(ProjectData$Years_Higher_Education, xlab = "Years of higher education", mai
 ```
 
 Top 5 universities sending students to Erasmus exchange
-```{r echo=TRUE, eval=FALSE, tidy=TRUE}
+```{r echo=FALSE, eval=TRUE, tidy=TRUE}
 
-barplot(top5cities$freq, main = "Top 5 universities", xlab = "University", ylab = "Students" , names.arg = top5cities$x, col = "darkblue", cex.names = 0.4)
+barplot(top5cities$freq, main = "Top 5 universities", xlab = "University", ylab = "Students" , names.arg = top5cities$x, col = "lightblue", cex.names = 0.4)
 
 ```
 
